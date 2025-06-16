@@ -1,0 +1,42 @@
+name: Deploy Portfolio to VPS
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: portfolio-runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Generate Prisma Client
+        run: yarn prisma generate
+
+      - name: Build project
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: yarn build
+
+      - name: Deploy to server
+        run: |
+          rsync -av --delete ./.next /var/www/portfolio/
+          rsync -av --delete ./node_modules /var/www/portfolio/
+          rsync -av --delete ./public /var/www/portfolio/
+          rsync -av --delete ./package.json /var/www/portfolio/
+          rsync -av --delete ./yarn.lock /var/www/portfolio/
+
+      - name: Restart application service
+        run: sudo systemctl restart portfolio.service
