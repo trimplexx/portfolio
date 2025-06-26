@@ -1,16 +1,18 @@
-import { NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
-/**
- * GET /api/projects/[id] - Pobiera jeden projekt ze wszystkimi szczegółami
- */
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+type RouteParams = {
+  id: string;
+};
+
+export const GET = async (
+  request: NextRequest,
+  { params }: { params: Promise<RouteParams> }
+) => {
   try {
+    const { id } = await params;
     const project = await prisma.project.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         images: true,
         category: true,
@@ -26,21 +28,19 @@ export async function GET(
     console.error("Błąd podczas pobierania projektu:", error);
     return NextResponse.json({ message: "Wystąpił błąd serwera." }, { status: 500 });
   }
-}
+};
 
-/**
- * PUT /api/projects/[id] - Edytuje istniejący projekt
- */
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export const PUT = async (
+  request: NextRequest,
+  { params }: { params: Promise<RouteParams> }
+) => {
   try {
+    const { id } = await params;
     const body = await request.json();
     const { title_pl, title_en, description_pl, description_en, demoUrl, githubUrl, categoryId } = body;
 
     const updatedProject = await prisma.project.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         title_pl,
         title_en,
@@ -57,4 +57,4 @@ export async function PUT(
     console.error("Błąd podczas aktualizacji projektu:", error);
     return NextResponse.json({ message: "Wystąpił błąd serwera." }, { status: 500 });
   }
-}
+};
