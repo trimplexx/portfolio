@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+
+  --color-fiord-50: #f6f7f9;
+  --color-fiord-100: #eceef2;
+  --color-fiord-200: #d6dae1;
+  --color-fiord-300: #b1bac8;
+  --color-fiord-400: #8795a9;
+  --color-fiord-500: #68788f;
+  --color-fiord-600: #536076;
+  --color-fiord-700: #4a5568;
+  --color-fiord-800: #3b4351;
+  --color-fiord-900: #2a2f3a;
+  --color-fiord-950: #1f2228;
+
+  --color-fiord: var(--color-fiord-500);
+
+  --color-border: var(--border);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: #4299e1;
+  --color-primary-foreground: #f6f7f9;
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+}
+
+@layer base {
+  :root {
+    --background: #f6f7f9;
+    --foreground: #1f2228;
+    --border: #d6dae1;
+    --muted: #eceef2;
+    --muted-foreground: #536076;
+    --primary-accent: #4299e1;
+  }
+
+  .dark {
+    --background: #1f2228;
+    --foreground: #eceef2;
+    --border: #3b4351;
+    --muted: #2a2f3a;
+    --muted-foreground: #8795a9;
+  }
+
+  .blob-container {
+    position: fixed;
+    inset: 0px;
+    z-index: -1;
+    overflow: hidden;
+    background-color: var(--background);
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 9999px;
+    opacity: 0.3;
+    animation: move 25s infinite alternate;
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  .dark .blob {
+    opacity: 0.4;
+  }
+
+  .blob-1 {
+    width: 24rem;
+    height: 24rem;
+    background-color: var(--primary-accent);
+    top: -150px;
+    left: -150px;
+  }
+
+  .blob-2 {
+    width: 20rem;
+    height: 20rem;
+    background-color: var(--muted-foreground);
+    bottom: -100px;
+    right: -100px;
+    animation-delay: 3s;
+    animation-duration: 30s;
+  }
+
+  .blob-3 {
+    width: 18rem;
+    height: 18rem;
+    background-color: var(--border);
+    bottom: 50px;
+    left: -150px;
+    animation-delay: 6s;
+    animation-duration: 20s;
+  }
+
+  .backdrop-blur {
+    position: absolute;
+    inset: 0px;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(100px);
+  }
+
+  @keyframes move {
+    from {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    to {
+      transform: translate(200px, 100px) rotate(360deg);
+    }
+  }
+}
