@@ -1,0 +1,12 @@
+{
+  "HomePage": {
+    "greeting": "Hi, I'm Łukasz",
+    "title": "Full-Stack Developer",
+    "description": "I create modern and efficient web applications from concept, through design, to server deployment.",
+    "button": "See my projects"
+  },
+  "Navbar": {
+    "language": "Language",
+    "theme": "Theme"
+  }
+}
