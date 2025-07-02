@@ -4,8 +4,8 @@ import "@/styles/globals.css";
 import { Navbar } from "@/components/Navbar";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
 import { ThemeProvider } from "../theme-provider";
+import { getMessages } from "next-intl/server";
 
 const inter = Inter({
   subsets: ["latin-ext"],
@@ -29,7 +29,7 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const { locale } = params;
+  const { locale } = await params;
   const messages = await getMessages();
 
   return (

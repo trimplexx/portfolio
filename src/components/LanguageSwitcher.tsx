@@ -1,9 +1,9 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { usePathname, useRouter } from "@/navigation";
 import { useTransition } from "react";
 import { Button } from "@/components/ui/Button";
+import { usePathname, useRouter } from "@/i18/navigation";
 
 export function LanguageSwitcher() {
   const [isPending, startTransition] = useTransition();

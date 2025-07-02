@@ -1,12 +1,18 @@
 import createMiddleware from "next-intl/middleware";
-import { locales, localePrefix } from "./navigation";
+import { routing } from "./i18/routing";
 
 export default createMiddleware({
+  // Domyślny język, jeśli żaden nie pasuje
   defaultLocale: "pl",
-  locales,
-  localePrefix,
+
+  // Lista obsługiwanych języków
+  locales: routing.locales,
+
+  // Zawsze pokazuj język w URL
+  localePrefix: "always",
 });
 
 export const config = {
-  matcher: ["/", "/(pl|en)/:path*", "/((?!_next|_vercel|.*\\..*).*)"],
+  // Dopasuj wszystkie ścieżki oprócz tych, które powinny być ignorowane
+  matcher: ["/((?!api|_next/static|_next/image|.*\\..*).*)"],
 };
