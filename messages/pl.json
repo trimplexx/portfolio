@@ -1,9 +1,6 @@
 {
   "HomePage": {
-    "greeting": "Cześć, jestem Łukasz",
-    "title": "Full-Stack Developer",
-    "description": "Tworzę nowoczesne i wydajne aplikacje internetowe od koncepcji, przez projekt, aż po wdrożenie na serwerze.",
-    "button": "Zobacz moje projekty"
+    "workInProgress": "🚧 Strona w budowie 🚧"
   },
   "Navbar": {
     "language": "Język",
