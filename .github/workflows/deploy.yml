@@ -32,11 +32,18 @@ jobs:
 
       - name: Deploy to server
         run: |
-          rsync -av --delete ./.next /var/www/portfolio/
-          rsync -av --delete ./node_modules /var/www/portfolio/
-          rsync -av --delete ./public /var/www/portfolio/
-          rsync -av --delete ./package.json /var/www/portfolio/
-          rsync -av --delete ./yarn.lock /var/www/portfolio/
+          echo "Deploying from: $(pwd)"
+          ls -la
+
+          rsync -av --delete .next/ /var/www/portfolio/.next/
+          rsync -av --delete node_modules/ /var/www/portfolio/node_modules/
+          rsync -av --delete public/ /var/www/portfolio/public/
+          rsync -av package.json /var/www/portfolio/
+          rsync -av yarn.lock /var/www/portfolio/
+          rsync -av prisma/ /var/www/portfolio/prisma/
+
+      - name: Set permissions (optional)
+        run: sudo chown -R www-data:www-data /var/www/portfolio
 
       - name: Restart application service
         run: sudo systemctl restart portfolio.service
