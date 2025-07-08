@@ -153,37 +153,45 @@ export const ImageUpload = ({ files, setFiles }: ImageUploadProps) => {
           multiple
           className="hidden"
           onChange={handleFileChange}
-          accept="image/png, image/jpeg"
+          accept="image/png, image/jpeg, image/webp"
         />
       </label>
 
       {previews.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-4">
           {previews.map((previewSrc, index) => (
-            <div key={index} className="relative group aspect-video bg-black">
+            <div
+              key={index}
+              className="relative group aspect-square bg-black rounded-md overflow-hidden"
+            >
               <Image
                 src={previewSrc}
-                alt={files[index]?.name || "preview"}
-                fill
-                className="object-cover rounded-md"
-                style={{
-                  objectFit: "cover",
+                alt={files[index]?.name || `Preview ${index + 1}`}
+                width={300}
+                height={300}
+                quality={90}
+                className="object-cover w-full h-full"
+                unoptimized
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = "/image-placeholder.svg";
                 }}
               />
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
                   type="button"
                   onClick={() => setImageToCrop({ src: previewSrc, index })}
-                  className="bg-background/80 text-foreground rounded-full p-2 cursor-pointer"
+                  className="bg-background/80 text-foreground rounded-full p-2 cursor-pointer hover:bg-background"
                   title="Przytnij"
+                  aria-label="Przytnij obraz"
                 >
                   <Crop size={16} />
                 </button>
                 <button
                   type="button"
                   onClick={() => handleRemoveFile(index)}
-                  className="bg-red-500/80 text-white rounded-full p-2 cursor-pointer"
+                  className="bg-red-500/80 text-white rounded-full p-2 cursor-pointer hover:bg-red-500"
                   title="Usuń"
+                  aria-label="Usuń obraz"
                 >
                   <X size={16} />
                 </button>

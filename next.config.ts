@@ -9,10 +9,12 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "selfcontainer.blob.core.windows.net",
-        port: "",
         pathname: "/portfolio-images/**",
       },
     ],
+    minimumCacheTTL: 60,
+    formats: ["image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
   },
   compress: true,
   productionBrowserSourceMaps: false,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
@@ -10,26 +10,32 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/admin/projekty";
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
 
-    const res = await fetch("/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
 
-    setIsLoading(false);
-    if (res.ok) {
-      router.push("/admin/projekty");
-      router.refresh();
-    } else {
       const data = await res.json();
-      setError(data.message || "Logowanie nie powiodło się.");
+
+      if (data.success) {
+        window.location.href = callbackUrl;
+      } else {
+        setError(data.message || "Logowanie nie powiodło się.");
+      }
+    } catch {
+      setError("Wystąpił błąd podczas łączenia z serwerem.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -51,6 +57,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                autoComplete="current-password"
               />
             </div>
             <Button type="submit" disabled={isLoading} className="w-full">
@@ -58,7 +65,7 @@ export default function LoginPage() {
             </Button>
           </div>
           {error && (
-            <p className="text-red-500 text-xs italic mt-4 text-center">
+            <p className="text-destructive text-xs italic mt-4 text-center">
               {error}
             </p>
           )}

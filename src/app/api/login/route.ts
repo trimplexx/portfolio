@@ -13,24 +13,28 @@ export async function POST(request: Request) {
     }
 
     if (password === adminPassword) {
-      (await cookies()).set("admin-password", adminPassword, {
+      (await cookies()).set("admin-auth", "authenticated", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         path: "/",
         maxAge: 60 * 60 * 24 * 7,
+        sameSite: "strict",
       });
 
-      return NextResponse.json({ message: "Zalogowano pomyślnie" });
+      return NextResponse.json({
+        message: "Zalogowano pomyślnie",
+        success: true,
+      });
     } else {
       return NextResponse.json(
-        { message: "Nieprawidłowe hasło" },
+        { message: "Nieprawidłowe hasło", success: false },
         { status: 401 }
       );
     }
   } catch (error) {
     console.error("Błąd logowania:", error);
     return NextResponse.json(
-      { message: "Wystąpił błąd serwera" },
+      { message: "Wystąpił błąd serwera", success: false },
       { status: 500 }
     );
   }

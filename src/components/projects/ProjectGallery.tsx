@@ -10,6 +10,8 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 type ImageProps = {
   id: string;
   url: string;
+  width?: number;
+  height?: number;
 };
 
 interface ProjectGalleryProps {
@@ -44,6 +46,8 @@ export const ProjectGallery = ({
   const slides = images.map((image) => ({
     src: image.url,
     alt: `${title} - ${mainImagePlaceholder}`,
+    width: image.width || 1920,
+    height: image.height || 1080,
   }));
 
   return (
@@ -57,21 +61,21 @@ export const ProjectGallery = ({
           className="relative w-full aspect-video bg-black rounded-lg border border-border overflow-hidden cursor-pointer"
           onClick={() => openLightbox(currentIndex)}
         >
-          <div className="relative w-full h-full">
-            <Image
-              src={images[currentIndex].url}
-              alt={`${title} - ${mainImagePlaceholder}`}
-              fill
-              className="object-contain"
-              priority
-              quality={90}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 66vw"
-              style={{
-                objectFit: "contain",
-                backgroundColor: "black",
-              }}
-            />
-          </div>
+          <Image
+            src={images[currentIndex].url}
+            alt={`${title} - ${mainImagePlaceholder}`}
+            width={1600}
+            height={900}
+            quality={90}
+            className="object-contain w-full h-full"
+            priority
+            style={{
+              backgroundColor: "black",
+            }}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "/image-placeholder.svg";
+            }}
+          />
         </motion.div>
 
         {images.length > 1 && (
@@ -80,7 +84,7 @@ export const ProjectGallery = ({
               <div
                 key={image.id}
                 onClick={() => setCurrentIndex(index)}
-                className={`relative w-full aspect-square rounded-md border-2 overflow-hidden cursor-pointer transition-all duration-200 ${
+                className={`relative aspect-square rounded-md border-2 overflow-hidden cursor-pointer transition-all duration-200 ${
                   currentIndex === index
                     ? "border-primary"
                     : "border-transparent hover:border-primary/50"
@@ -89,10 +93,14 @@ export const ProjectGallery = ({
                 <Image
                   src={image.url}
                   alt={`${title} - ${thumbnailPlaceholder} ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  quality={80}
-                  sizes="(max-width: 768px) 25vw, (max-width: 1024px) 20vw, 10vw"
+                  width={200}
+                  height={200}
+                  quality={85}
+                  className="object-cover w-full h-full"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src =
+                      "/image-placeholder.svg";
+                  }}
                 />
               </div>
             ))}
@@ -112,16 +120,16 @@ export const ProjectGallery = ({
         animation={{ fade: 300 }}
         render={{
           slide: ({ slide }) => (
-            <div className="flex items-center justify-center w-full h-full bg-black">
-              <div className="relative w-full h-full">
-                <Image
-                  src={slide.src}
-                  alt={slide.alt || `${title} - ${mainImagePlaceholder}`}
-                  fill
-                  className="object-contain"
-                  quality={100}
-                />
-              </div>
+            <div className="flex items-center justify-center w-full h-full">
+              <Image
+                src={slide.src}
+                alt={slide.alt || `${title} - ${mainImagePlaceholder}`}
+                width={slide.width}
+                height={slide.height}
+                className="object-contain max-h-[90vh] max-w-[90vw]"
+                quality={100}
+                unoptimized
+              />
             </div>
           ),
         }}
