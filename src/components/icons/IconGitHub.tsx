@@ -6,7 +6,7 @@ export const IconGitHub = ({
   className?: string;
   href?: string;
 }) => {
-  const targetHref = href || "https://github.com/lkrawczyk";
+  const targetHref = href || "https://github.com/trimplexx";
 
   return (
     <a

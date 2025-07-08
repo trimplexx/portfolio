@@ -1,6 +1,5 @@
 "use client";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { IconGitHub } from "@/components/icons/IconGitHub";
 import { IconLinkedIn } from "@/components/icons/IconLinkedIn";
 import { motion } from "framer-motion";
@@ -21,6 +20,13 @@ export const HeroSection = () => {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById("projects");
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -49,12 +55,12 @@ export const HeroSection = () => {
         className="flex flex-col items-center gap-6 sm:flex-row"
       >
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-muted-foreground">
-          <Link
-            href="#projects"
+          <button
+            onClick={scrollToProjects}
             className="font-medium transition-colors hover:text-primary"
           >
             {t("heroCtaProjects")}
-          </Link>
+          </button>
           <a
             href="/CV - Łukasz Krawczyk.pdf"
             target="_blank"

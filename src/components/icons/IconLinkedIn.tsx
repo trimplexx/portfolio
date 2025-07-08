@@ -3,7 +3,7 @@ import React from "react";
 export const IconLinkedIn = ({ className }: { className?: string }) => {
   return (
     <a
-      href="https://www.linkedin.com/in/lukaszkrawczyk-dev/"
+      href="https://www.linkedin.com/in/%C5%82ukasz-krawczyk-421b812b9/"
       target="_blank"
       rel="noopener noreferrer"
       className={className}
