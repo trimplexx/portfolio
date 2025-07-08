@@ -12,11 +12,23 @@ const nextConfig: NextConfig = {
         pathname: "/portfolio-images/**",
       },
     ],
-    domains: ["selfcontainer.blob.core.windows.net"],
-    minimumCacheTTL: 60,
   },
-  experimental: {
-    optimizePackageImports: ["next-intl", "react-icons", "react-hook-form"],
+  async headers() {
+    return [
+      {
+        source: "/_next/image",
+        headers: [
+          {
+            key: "Accept",
+            value: "image/webp,image/apng,image/*,*/*;q=0.8",
+          },
+          {
+            key: "x-ms-version",
+            value: "2020-04-08",
+          },
+        ],
+      },
+    ];
   },
   compress: true,
   productionBrowserSourceMaps: false,
