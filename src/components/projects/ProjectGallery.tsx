@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -12,6 +13,7 @@ type ImageProps = {
   url: string;
   width?: number;
   height?: number;
+  alt?: string;
 };
 
 interface ProjectGalleryProps {
@@ -30,6 +32,15 @@ export const ProjectGallery = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
+  const slides = useMemo(() => {
+    return images.map((image) => ({
+      src: image.url,
+      alt: image.alt || `${title} - ${mainImagePlaceholder}`,
+      width: image.width || 1920,
+      height: image.height || 1080,
+    }));
+  }, [images, title, mainImagePlaceholder]);
+
   if (images.length === 0) {
     return (
       <div className="relative w-full aspect-video bg-muted/80 rounded-lg flex items-center justify-center border border-border overflow-hidden">
@@ -43,18 +54,11 @@ export const ProjectGallery = ({
     setIsOpen(true);
   };
 
-  const slides = images.map((image) => ({
-    src: image.url,
-    alt: `${title} - ${mainImagePlaceholder}`,
-    width: image.width || 1920,
-    height: image.height || 1080,
-  }));
-
   return (
     <>
       <div className="space-y-4">
         <motion.div
-          key={currentIndex}
+          key={`main-${currentIndex}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
@@ -63,15 +67,20 @@ export const ProjectGallery = ({
         >
           <Image
             src={images[currentIndex].url}
-            alt={`${title} - ${mainImagePlaceholder}`}
+            alt={
+              images[currentIndex].alt || `${title} - ${mainImagePlaceholder}`
+            }
             width={1600}
             height={900}
             quality={90}
-            className="object-contain w-full h-full"
             priority
+            className="object-contain"
             style={{
+              width: "100%",
+              height: "100%",
               backgroundColor: "black",
             }}
+            unoptimized
             onError={(e) => {
               (e.target as HTMLImageElement).src = "/image-placeholder.svg";
             }}
@@ -82,7 +91,7 @@ export const ProjectGallery = ({
           <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
             {images.map((image, index) => (
               <div
-                key={image.id}
+                key={`thumb-${image.id}-${index}`}
                 onClick={() => setCurrentIndex(index)}
                 className={`relative aspect-square rounded-md border-2 overflow-hidden cursor-pointer transition-all duration-200 ${
                   currentIndex === index
@@ -92,11 +101,19 @@ export const ProjectGallery = ({
               >
                 <Image
                   src={image.url}
-                  alt={`${title} - ${thumbnailPlaceholder} ${index + 1}`}
+                  alt={
+                    image.alt ||
+                    `${title} - ${thumbnailPlaceholder} ${index + 1}`
+                  }
                   width={200}
                   height={200}
                   quality={85}
-                  className="object-cover w-full h-full"
+                  className="object-cover"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  unoptimized
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =
                       "/image-placeholder.svg";
@@ -121,14 +138,11 @@ export const ProjectGallery = ({
         render={{
           slide: ({ slide }) => (
             <div className="flex items-center justify-center w-full h-full">
-              <Image
+              <img
                 src={slide.src}
-                alt={slide.alt || `${title} - ${mainImagePlaceholder}`}
-                width={slide.width}
-                height={slide.height}
+                alt={slide.alt}
                 className="object-contain max-h-[90vh] max-w-[90vw]"
-                quality={100}
-                unoptimized
+                loading="eager"
               />
             </div>
           ),

@@ -166,11 +166,15 @@ export const ImageUpload = ({ files, setFiles }: ImageUploadProps) => {
             >
               <Image
                 src={previewSrc}
-                alt={files[index]?.name || `Preview ${index + 1}`}
+                alt={files[index]?.name || `Preview image ${index + 1}`}
                 width={300}
                 height={300}
                 quality={90}
-                className="object-cover w-full h-full"
+                className="object-cover"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
                 unoptimized
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = "/image-placeholder.svg";
