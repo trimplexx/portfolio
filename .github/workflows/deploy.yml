@@ -28,6 +28,10 @@ jobs:
       - name: Build project
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+          AZURE_STORAGE_CONTAINER_NAME: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
+          AZURE_STORAGE_URL_PREFIX: ${{ secrets.AZURE_STORAGE_URL_PREFIX }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: yarn build
 
       - name: Deploy to server
@@ -36,6 +40,7 @@ jobs:
           rsync -av --delete ./node_modules /var/www/portfolio/
           rsync -av --delete ./package.json /var/www/portfolio/
           rsync -av --delete ./yarn.lock /var/www/portfolio/
+          rsync -av --delete ./prisma /var/www/portfolio/  # Dodane, jeśli używasz migracji Prismy
 
       - name: Restart application service
         run: sudo systemctl restart portfolio.service
