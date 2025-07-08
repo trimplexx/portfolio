@@ -13,20 +13,41 @@ model Category {
   projects Project[]
 }
 
+model Technology {
+  id        String                 @id @default(cuid())
+  name      String                 @unique
+  projects  TechnologiesOnProjects[]
+}
+
 model Project {
-  id             String   @id @default(cuid())
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  title_pl       String   @db.VarChar(255)
-  title_en       String   @db.VarChar(255)
-  description_pl String   @db.Text
-  description_en String   @db.Text
-  demoUrl        String?
-  githubUrl      String?
-  images         ProjectImage[]
+  id              String        @id @default(cuid())
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  title_pl        String        @db.VarChar(255)
+  title_en        String        @db.VarChar(255)
+  summary_pl      String        @db.VarChar(255)
+  summary_en      String        @db.VarChar(255)
+  description_pl  String        @db.Text
+  description_en  String        @db.Text
+  demoUrl         String?
+  githubUrl       String?
+  images          ProjectImage[]
+  
+  technologies    TechnologiesOnProjects[]
 
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
+}
+
+model TechnologiesOnProjects {
+  project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId    String
+  technology   Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  technologyId String
+  assignedAt   DateTime   @default(now())
+  assignedBy   String?
+
+  @@id([projectId, technologyId])
 }
 
 model ProjectImage {

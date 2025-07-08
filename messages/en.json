@@ -1,9 +1,64 @@
 {
-  "HomePage": {
-    "workInProgress": "🚧 Website Under Construction 🚧"
-  },
   "Navbar": {
     "language": "Language",
-    "theme": "Theme"
+    "theme": "Theme",
+    "about": "About",
+    "projects": "Projects",
+    "timeline": "Career"
+  },
+  "HomePage": {
+    "heroTitle": "Łukasz Krawczyk.",
+    "heroSubtitle": "Constructing code, building experiences.",
+    "heroCtaProjects": "Projects",
+    "heroCtaCv": "CV",
+    "aboutTitle": "About Me",
+    "aboutSubtitleStory": "My Story",
+    "aboutSubtitlePassions": "Beyond the Code",
+    "aboutP1": "Hi, I'm Łukasz. My programming adventure began during my engineering studies at the Faculty of Electrical Engineering at the Silesian University of Technology. It was there, while writing my first console applications in C++, that I discovered my passion for creating. The natural evolution was to move to C# and the .NET platform, where I developed my skills by building desktop applications using WinForms and WPF.",
+    "aboutP2": "Over time, my curiosity led me to the world of web development. I started with PHP to deeply understand the logic of web applications, and then fully immersed myself in the .NET ecosystem, creating advanced solutions based on MVC and Web API architecture. The culmination of this stage was my engineering thesis – the 'Trzeba Chleba' RESTful API application with a React.js front-end.",
+    "aboutP3": "My Master's studies at the Faculty of Automatic Control, Electronics and Computer Science, specializing in Internet and Network Technologies, allowed me to broaden my horizons to include VPS server administration, CI/CD automation, and cloud solutions like Azure. For my master's thesis, I combined programming with my greatest passion – music – by creating a neural network-based system for automatic transcription of guitar recordings. I also rebuilt the 'Trzeba Chleba' project, implementing best e-commerce practices and modern technologies.",
+    "aboutP4": "When I'm not coding, I most enjoy experimenting in the kitchen, playing football, or working out at the gym. I'm also a regular on YouTube and live streams, where I follow the latest tech news and more.",
+    "projectsTitle": "Projects",
+    "trzebachlebaDescription": "My task was to design and implement the entire system, from the Next.js interface to the .NET 8 API. The biggest challenge was implementing secure JWT authentication and creating an intuitive admin panel.",
+    "guitarTranscriptionDescription": "A solution for automatic transcription of guitar music, converting audio recordings into tablatures using CRNN networks and advanced audio signal processing.",
+    "cookinupDescription": "A web application inspired by the TV show 'Come Dine with Me', allowing users to create lobbies, invite friends, plan culinary meetings, and rate each other's dishes."
+  },
+  "Footer": {
+    "rights": "All rights reserved."
+  },
+  "Timeline": {
+    "locale": "en-US",
+    "title": "My Professional Journey",
+    "today": "Today",
+    "year": "year",
+    "years": "years",
+    "month": "month",
+    "months": "months",
+    "studiesStartTitle": "Start of Engineering Studies",
+    "studiesStartDesc": "Began my studies in Computer Science at the Faculty of Electrical Engineering, Silesian University of Technology.",
+    "internshipTitle": "IT Intern",
+    "internshipDesc": "A one-month internship at the Provincial Ambulance Service, involving user support and helpdesk tasks.",
+    "waskoTitle": "Junior .NET Developer",
+    "waskoDesc": "Enhancing existing .NET software with new features, followed by work with a Business Intelligence tool and the PostgreSQL database.",
+    "mastersStartTitle": "Start of Master's Studies",
+    "mastersStartDesc": "Continuing my education at the Faculty of Automatic Control, Electronics and Computer Science, specializing in Internet and Network Technologies."
+  },
+  "ProjectPage": {
+    "mainImagePlaceholder": "Main project image",
+    "thumbnailPlaceholder": "Thumbnail",
+    "aboutProjectTitle": "About The Project",
+    "techStackTitle": "Tech Stack",
+    "liveDemoButton": "Live Demo",
+    "githubButton": "View on GitHub",
+    "projectDetailP1": "'Trzeba Chleba' is a fully functional e-commerce platform that I created as my engineering thesis. The goal of the project was to build a complete system from scratch, allowing customers to browse products, place orders, and manage their accounts.",
+    "projectDetailP2": "The application is based on a REST architecture, with a backend in .NET 8 Web API technology and a modern, interactive frontend in Next.js. One of the main challenges was implementing a secure authentication system based on JWT and designing an intuitive admin panel for managing products, orders, and users."
+  },
+  "TechStack": {
+    "title": "Technologies I Work With",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "databases": "Databases",
+    "devops": "DevOps & Cloud",
+    "ai/ml": "AI & ML"
   }
 }

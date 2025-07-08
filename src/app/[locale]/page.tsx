@@ -1,15 +1,19 @@
-import { useTranslations } from "next-intl";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { TimelineSection } from "@/components/sections/TimelineSection";
+import { TechStackSection } from "@/components/sections/TechStackSection";
 
 export default function Home() {
-  const t = useTranslations("HomePage");
-
   return (
-    <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-8 text-center">
-      <div className="w-full max-w-2xl text-center mb-10">
-        <p className="text-xl md:text-2xl font-semibold text-yellow-500 dark:text-fiord-600 rounded-lg p-3">
-          {t("workInProgress")}
-        </p>
-      </div>
-    </main>
+    <>
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <HeroSection />
+        <AboutSection />
+        <TimelineSection />
+        <TechStackSection />
+        <ProjectsSection />
+      </main>
+    </>
   );
 }

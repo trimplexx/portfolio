@@ -6,7 +6,7 @@ export const AnimatedBackground = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative">
       <div className="blob-container">
         <div className="blob blob-1"></div>
         <div className="blob blob-2"></div>

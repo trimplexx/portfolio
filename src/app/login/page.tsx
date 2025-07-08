@@ -25,7 +25,7 @@ export default function LoginPage() {
 
     setIsLoading(false);
     if (res.ok) {
-      router.push("/admin/add");
+      router.push("/admin/projekty");
       router.refresh();
     } else {
       const data = await res.json();

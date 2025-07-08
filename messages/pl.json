@@ -1,9 +1,64 @@
 {
-  "HomePage": {
-    "workInProgress": "🚧 Strona w budowie 🚧"
-  },
   "Navbar": {
     "language": "Język",
-    "theme": "Motyw"
+    "theme": "Motyw",
+    "about": "O Mnie",
+    "projects": "Projekty",
+    "timeline": "Kariera"
+  },
+  "HomePage": {
+    "heroTitle": "Łukasz Krawczyk.",
+    "heroSubtitle": "Konstruuję kod, buduję doświadczenia.",
+    "heroCtaProjects": "Projekty",
+    "heroCtaCv": "CV",
+    "aboutTitle": "O Mnie",
+    "aboutSubtitleStory": "Moja historia",
+    "aboutSubtitlePassions": "Poza kodem",
+    "aboutP1": "Cześć, jestem Łukasz. Moja przygoda z programowaniem rozpoczęła się wraz ze studiami inżynierskimi na Wydziale Elektrycznym Politechniki Śląskiej. To tam, pisząc pierwsze programy konsolowe w C++, odkryłem pasję do tworzenia. Naturalną ewolucją było przejście na C# i platformę .NET, gdzie rozwijałem umiejętności, budując aplikacje desktopowe w technologiach WinForms i WPF.",
+    "aboutP2": "Z czasem moja ciekawość skierowała mnie w stronę świata web developmentu. Zaczynałem od PHP, by dogłębnie zrozumieć logikę aplikacji sieciowych, by następnie w pełni zanurzyć się w ekosystemie .NET, tworząc zaawansowane rozwiązania w oparciu o architekturę MVC i Web API. Zwieńczeniem tego etapu była moja praca inżynierska – aplikacja RESTful API „Trzeba Chleba” z front-endem w React.js.",
+    "aboutP3": "Studia magisterskie na Wydziale Automatyki, Elektroniki i Informatyki o specjalizacji Internet i Technologie Sieciowe pozwoliły mi poszerzyć horyzonty o administrację serwerami VPS, automatyzację CI/CD i rozwiązania chmurowe, takie jak Azure. W ramach pracy magisterskiej połączyłem programowanie z moją największą pasją – muzyką – tworząc oparty na sieciach neuronowych system do automatycznej transkrypcji nagrań gitarowych. Przebudowałem także projekt „Trzeba Chleba”, wdrażając w nim najlepsze praktyki e-commerce i nowoczesne technologie.",
+    "aboutP4": "Gdy nie koduję, najchętniej eksperymentuję w kuchni, gram w piłkę nożną lub ćwiczę na siłowni. Jestem też stałym bywalcem YouTube'a i transmisji na żywo, gdzie śledzę nowinki technologiczne i nie tylko.",
+    "projectsTitle": "Projekty",
+    "trzebachlebaDescription": "Moim zadaniem było zaprojektowanie i wdrożenie pełnego systemu, od interfejsu w Next.js po API w .NET 8. Największym wyzwaniem była implementacja bezpiecznego uwierzytelniania JWT oraz stworzenie intuicyjnego panelu administracyjnego.",
+    "guitarTranscriptionDescription": "Rozwiązanie do automatycznej transkrypcji muzyki gitarowej, przekształcające nagrania audio na tabulatury przy użyciu sieci CRNN i zaawansowanego przetwarzania sygnałów audio.",
+    "cookinupDescription": "Aplikacja webowa inspirowana programem 'Ugotowani', pozwalająca na tworzenie lobby, zapraszanie znajomych, planowanie spotkań kulinarnych i wzajemne ocenianie potraw."
+  },
+  "Footer": {
+    "rights": "Wszelkie prawa zastrzeżone."
+  },
+  "Timeline": {
+    "locale": "pl-PL",
+    "title": "Moja Droga Zawodowa",
+    "today": "Dzisiaj",
+    "year": "rok",
+    "years": "lata",
+    "month": "miesiąc",
+    "months": "miesięcy",
+    "studiesStartTitle": "Początek Studiów Inżynierskich",
+    "studiesStartDesc": "Rozpoczęcie studiów na kierunku Informatyka na Wydziale Elektrycznym Politechniki Śląskiej.",
+    "internshipTitle": "Praktykant IT",
+    "internshipDesc": "Miesięczny staż w Wojewódzkim Pogotowiu Ratunkowym, obejmujący wsparcie użytkowników w ramach helpdesku.",
+    "waskoTitle": "Młodszy Programista .NET",
+    "waskoDesc": "Rozwój istniejącego oprogramowania w technologii .NET o nowe funkcjonalności, a następnie praca z narzędziami Business Intelligence oraz bazą danych PostgreSQL.",
+    "mastersStartTitle": "Początek Studiów Magisterskich",
+    "mastersStartDesc": "Kontynuacja nauki na Wydziale Automatyki, Elektroniki i Informatyki, ze specjalizacją Internet i Technologie Sieciowe."
+  },
+  "ProjectPage": {
+    "mainImagePlaceholder": "Główne zdjęcie projektu",
+    "thumbnailPlaceholder": "Miniaturka",
+    "aboutProjectTitle": "O Projekcie",
+    "techStackTitle": "Użyte Technologie",
+    "liveDemoButton": "Zobacz na żywo",
+    "githubButton": "Kod na GitHub",
+    "projectDetailP1": "„Trzeba Chleba” to w pełni funkcjonalna platforma e-commerce, którą stworzyłem jako moją pracę inżynierską. Celem projektu było zbudowanie od podstaw kompletnego systemu, który umożliwia klientom przeglądanie produktów, składanie zamówień oraz zarządzanie swoim kontem.",
+    "projectDetailP2": "Aplikacja została oparta o architekturę REST, z backendem w technologii .NET 8 Web API oraz nowoczesnym, interaktywnym frontendem w Next.js. Jednym z głównych wyzwań była implementacja bezpiecznego systemu uwierzytelniania opartego o JWT oraz zaprojektowanie intuicyjnego panelu administracyjnego do zarządzania produktami, zamówieniami i użytkownikami."
+  },
+  "TechStack": {
+    "title": "Technologie, z którymi pracuję",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "databases": "Bazy Danych",
+    "devops": "DevOps i Chmura",
+    "ai/ml": "AI i ML"
   }
 }

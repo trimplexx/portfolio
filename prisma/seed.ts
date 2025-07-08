@@ -1,26 +1,31 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
   console.log(`Start seeding ...`);
 
-  await prisma.category.upsert({
-    where: { name: 'Indywidualne' },
-    update: {},
-    create: { name: 'Indywidualne' },
-  });
+  const categories = [
+    "Indywidualny Akademicki",
+    "Grupowy Akademicki",
+    "Indywidualny Komercyjny",
+    "Grupowy Komercyjny",
+    "Hobbystyczny",
+    "Badawczy",
+  ];
 
-  await prisma.category.upsert({
-    where: { name: 'Grupowe' },
-    update: {},
-    create: { name: 'Grupowe' },
-  });
+  for (const category of categories) {
+    await prisma.category.upsert({
+      where: { name: category },
+      update: {},
+      create: { name: category },
+    });
+  }
 
   console.log(`Seeding finished.`);
 }
 
 main()
-  .catch(e => {
+  .catch((e) => {
     console.error(e);
     process.exit(1);
   })
