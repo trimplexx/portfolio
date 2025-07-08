@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState, useMemo } from "react";
@@ -137,12 +136,21 @@ export const ProjectGallery = ({
         animation={{ fade: 300 }}
         render={{
           slide: ({ slide }) => (
-            <div className="flex items-center justify-center w-full h-full">
-              <img
+            <div className="relative w-full h-full">
+              <Image
                 src={slide.src}
-                alt={slide.alt}
-                className="object-contain max-h-[90vh] max-w-[90vw]"
-                loading="eager"
+                alt={slide.alt || `${title} - ${mainImagePlaceholder}`}
+                fill
+                quality={100}
+                className="object-contain"
+                style={{
+                  maxHeight: "90vh",
+                  maxWidth: "90vw",
+                }}
+                unoptimized
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = "/image-placeholder.svg";
+                }}
               />
             </div>
           ),
