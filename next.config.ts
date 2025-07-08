@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
         pathname: "/portfolio-images/**",
       },
     ],
+    domains: ["selfcontainer.blob.core.windows.net"],
+    minimumCacheTTL: 60,
   },
   experimental: {
     optimizePackageImports: ["next-intl", "react-icons", "react-hook-form"],
