@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ReactCrop, {
   type Crop,
   centerCrop,
@@ -8,7 +9,6 @@ import ReactCrop, {
 } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import { Button } from "@/components/ui/Button";
-import Image from "next/image";
 
 interface ImageCropperProps {
   imageSrc: string;
@@ -26,18 +26,30 @@ export const ImageCropper = ({
   const [crop, setCrop] = useState<Crop>();
   const imgRef = useRef<HTMLImageElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(false);
+    setImageError(false);
+  }, [imageSrc]);
 
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
     const img = e.currentTarget;
-    imgRef.current = img;
     const { width, height } = img;
+
     const initialCrop = centerCrop(
       makeAspectCrop({ unit: "%", width: 90 }, aspect, width, height),
       width,
       height
     );
+
     setCrop(initialCrop);
     setIsLoaded(true);
+  }
+
+  function onImageError() {
+    setImageError(true);
+    setIsLoaded(false);
   }
 
   const handleCrop = () => {
@@ -80,43 +92,50 @@ export const ImageCropper = ({
         <h3 className="text-xl font-bold mb-4">Przytnij zdjęcie</h3>
 
         <div className="flex-1 overflow-auto mb-4 flex justify-center items-center bg-gray-100 dark:bg-gray-800 rounded-lg">
-          {!isLoaded && (
+          {!isLoaded && !imageError && (
             <div className="w-full h-64 flex items-center justify-center">
               <p className="text-muted-foreground">Ładowanie zdjęcia...</p>
             </div>
           )}
 
-          <ReactCrop
-            crop={crop}
-            onChange={(c) => setCrop(c)}
-            aspect={aspect}
-            className={`${isLoaded ? "block" : "hidden"} overflow-hidden`}
-          >
-            <div className="relative w-full h-full min-h-[400px]">
-              <Image
+          {imageError && (
+            <div className="w-full h-64 flex items-center justify-center">
+              <p className="text-red-500">Błąd podczas ładowania zdjęcia</p>
+            </div>
+          )}
+
+          {!imageError && (
+            <ReactCrop
+              crop={crop}
+              onChange={(c) => setCrop(c)}
+              aspect={aspect}
+              className={`${isLoaded ? "block" : "hidden"} overflow-hidden`}
+            >
+              <img
+                ref={imgRef}
                 src={imageSrc}
                 onLoad={onImageLoad}
+                onError={onImageError}
                 alt="Do przycięcia"
-                fill
-                className="object-contain"
                 style={{
+                  maxWidth: "100%",
+                  maxHeight: "70vh",
                   display: isLoaded ? "block" : "none",
-                  objectFit: "contain",
-                }}
-                unoptimized
-                ref={(el) => {
-                  if (el) imgRef.current = el;
                 }}
               />
-            </div>
-          </ReactCrop>
+            </ReactCrop>
+          )}
         </div>
 
         <div className="flex justify-end gap-3 pt-4 border-t border-border">
           <Button type="button" variant="ghost" onClick={onClose}>
             Anuluj
           </Button>
-          <Button type="button" onClick={handleCrop} disabled={!isLoaded}>
+          <Button
+            type="button"
+            onClick={handleCrop}
+            disabled={!isLoaded || imageError}
+          >
             Zapisz i przytnij
           </Button>
         </div>
