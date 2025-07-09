@@ -8,7 +8,7 @@
   },
   "HomePage": {
     "heroTitle": "Łukasz Krawczyk.",
-    "heroSubtitle": "Konstruuję kod, buduję doświadczenia.",
+    "heroSubtitle": "Konstruuję kod, buduję doświadczenie.",
     "heroCtaProjects": "Projekty",
     "heroCtaCv": "CV",
     "aboutTitle": "O Mnie",
@@ -17,7 +17,7 @@
     "aboutP1": "Cześć, jestem Łukasz. Moja przygoda z programowaniem rozpoczęła się wraz ze studiami inżynierskimi na Wydziale Elektrycznym Politechniki Śląskiej. To tam, pisząc pierwsze programy konsolowe w C++, odkryłem pasję do tworzenia. Naturalną ewolucją było przejście na C# i platformę .NET, gdzie rozwijałem umiejętności, budując aplikacje desktopowe w technologiach WinForms i WPF.",
     "aboutP2": "Z czasem moja ciekawość skierowała mnie w stronę świata web developmentu. Zaczynałem od PHP, by dogłębnie zrozumieć logikę aplikacji sieciowych, by następnie w pełni zanurzyć się w ekosystemie .NET, tworząc zaawansowane rozwiązania w oparciu o architekturę MVC i Web API. Zwieńczeniem tego etapu była moja praca inżynierska – aplikacja RESTful API „Trzeba Chleba” z front-endem w React.js.",
     "aboutP3": "Studia magisterskie na Wydziale Automatyki, Elektroniki i Informatyki o specjalizacji Internet i Technologie Sieciowe pozwoliły mi poszerzyć horyzonty o administrację serwerami VPS, automatyzację CI/CD i rozwiązania chmurowe, takie jak Azure. W ramach pracy magisterskiej połączyłem programowanie z moją największą pasją – muzyką – tworząc oparty na sieciach neuronowych system do automatycznej transkrypcji nagrań gitarowych. Przebudowałem także projekt „Trzeba Chleba”, wdrażając w nim najlepsze praktyki e-commerce i nowoczesne technologie.",
-    "aboutP4": "Gdy nie koduję, najchętniej eksperymentuję w kuchni, gram w piłkę nożną lub ćwiczę na siłowni. Jestem też stałym bywalcem YouTube'a i transmisji na żywo, gdzie śledzę nowinki technologiczne i nie tylko.",
+    "aboutP4": "Gdy nie koduję, najchętniej eksperymentuję w kuchni, gram w piłkę nożną lub ćwiczę na siłowni. Jestem też stałym bywalcem YouTube'a i transmisji na żywo, gdzie śledzę i oglądam różne treści rozrywkowe, technologiczne i naukowe.",
     "projectsTitle": "Projekty",
     "trzebachlebaDescription": "Moim zadaniem było zaprojektowanie i wdrożenie pełnego systemu, od interfejsu w Next.js po API w .NET 8. Największym wyzwaniem była implementacja bezpiecznego uwierzytelniania JWT oraz stworzenie intuicyjnego panelu administracyjnego.",
     "guitarTranscriptionDescription": "Rozwiązanie do automatycznej transkrypcji muzyki gitarowej, przekształcające nagrania audio na tabulatury przy użyciu sieci CRNN i zaawansowanego przetwarzania sygnałów audio.",

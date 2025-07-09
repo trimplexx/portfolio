@@ -3,42 +3,8 @@
 import { useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Briefcase, GraduationCap, Calendar } from "lucide-react";
-
-const events = [
-  {
-    date: "2020-09-01",
-    endDate: "2024-02-1",
-    titleKey: "studiesStartTitle",
-    descriptionKey: "studiesStartDesc",
-    icon: <GraduationCap />,
-    type: "education" as const,
-  },
-  {
-    date: "2023-06-01",
-    endDate: "2023-06-30",
-    titleKey: "internshipTitle",
-    descriptionKey: "internshipDesc",
-    icon: <Briefcase />,
-    type: "work" as const,
-  },
-  {
-    date: "2024-02-01",
-    endDate: "today",
-    titleKey: "mastersStartTitle",
-    descriptionKey: "mastersStartDesc",
-    icon: <GraduationCap />,
-    type: "education" as const,
-  },
-  {
-    date: "2024-07-01",
-    endDate: "2025-02-1",
-    titleKey: "waskoTitle",
-    descriptionKey: "waskoDesc",
-    icon: <Briefcase />,
-    type: "work" as const,
-  },
-];
+import { Calendar } from "lucide-react";
+import { events } from "@/lib/events";
 
 const formatDuration = (months: number, t: (key: string) => string) => {
   if (months < 1) months = 1;
@@ -84,8 +50,8 @@ const EventCard = ({
   const durationText = formatDuration(durationInMonths, t);
 
   const variants = {
-    hidden: { opacity: 0, x: isLeft ? -100 : 100 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   const typeClasses = {
@@ -103,22 +69,20 @@ const EventCard = ({
       variants={variants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className={`mb-8 flex justify-between items-center w-full ${
-        isLeft ? "flex-row-reverse" : ""
+      className={`relative flex w-full items-start md:w-1/2 ${
+        isLeft ? "md:self-end md:flex-row-reverse" : "md:self-start"
       }`}
     >
-      <div className="order-1 w-5/12"></div>
-      <div className="z-20 flex items-center order-1 bg-background shadow-xl w-12 h-12 rounded-full">
-        <h1
-          className={`mx-auto font-semibold text-lg ${iconClasses[event.type]}`}
-        >
+      <div className="absolute left-5 top-0 z-10 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-background shadow-xl md:relative md:left-auto md:top-auto md:h-12 md:w-12 md:translate-x-0 md:shrink-0">
+        <div className={`font-semibold text-lg ${iconClasses[event.type]}`}>
           {event.icon}
-        </h1>
+        </div>
       </div>
+
       <div
-        className={`order-1 ${
-          typeClasses[event.type]
-        } rounded-lg shadow-xl w-5/12 px-6 py-4 border relative`}
+        className={`w-full rounded-lg border px-6 py-4 shadow-xl ml-12 md:ml-0 ${
+          isLeft ? "md:mr-8" : "md:ml-8"
+        } ${typeClasses[event.type]}`}
       >
         <h3 className="mb-2 font-bold text-lg">{t(event.titleKey)}</h3>
         <p className="text-sm leading-snug tracking-wide text-muted-foreground">
@@ -152,24 +116,22 @@ export const TimelineSection = () => {
       </h2>
       <div
         ref={ref}
-        className="relative container mx-auto px-6 flex flex-col space-y-4"
+        className="relative container mx-auto flex flex-col items-center gap-12 px-4"
       >
         <motion.div
           initial={{ scaleY: 0 }}
           animate={{ scaleY: isInView ? 1 : 0 }}
           transition={{ duration: 1, ease: "easeInOut" }}
-          className="absolute z-0 w-2 bg-primary/20 rounded-full h-full left-1/2 -ml-1"
+          className="absolute top-0 z-0 h-full w-1 rounded-full bg-primary/20 left-5 -translate-x-1/2 md:left-1/2"
           style={{ transformOrigin: "top" }}
-        ></motion.div>
+        />
         {events.map((event, index) => (
           <EventCard key={index} event={event} t={t} isLeft={index % 2 === 1} />
         ))}
-        <div className="mb-8 flex justify-between items-center w-full">
-          <div className="order-1 w-5/12"></div>
-          <div className="z-20 flex items-center order-1 bg-primary text-primary-foreground shadow-xl w-24 h-8 rounded-full">
+        <div className="absolute bottom-0 z-10 h-8 left-5 -translate-x-1/2 md:left-1/2">
+          <div className="flex items-center bg-primary text-primary-foreground shadow-xl w-24 h-8 rounded-full">
             <p className="mx-auto font-semibold text-sm">{t("today")}</p>
           </div>
-          <div className="order-1 w-5/12"></div>
         </div>
       </div>
     </section>

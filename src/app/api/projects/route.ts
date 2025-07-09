@@ -5,7 +5,7 @@ import { deleteBlob } from "@/lib/azure-storage";
 export async function GET() {
   try {
     const projects = await prisma.project.findMany({
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: "asc" },
       select: {
         id: true,
         title_pl: true,

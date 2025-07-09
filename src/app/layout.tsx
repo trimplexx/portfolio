@@ -46,7 +46,7 @@ export default async function RootLayout({
             defaultTheme="dark"
             storageKey="theme"
           >
-            <div className="relative flex flex-1 flex-col">
+            <div className="relative flex flex-1 flex-col overflow-x-hidden">
               <AnimatedBackground>
                 <Navbar />
                 {children}
