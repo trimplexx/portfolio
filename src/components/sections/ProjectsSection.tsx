@@ -64,7 +64,7 @@ export const ProjectsSection = () => {
       className="py-20"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.05 }}
       variants={containerVariants}
     >
       <h2 className="text-3xl md:text-4xl font-bold font-serif text-center mb-12">

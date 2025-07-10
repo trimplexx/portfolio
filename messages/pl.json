@@ -2,7 +2,7 @@
   "Navbar": {
     "language": "Język",
     "theme": "Motyw",
-    "about": "O Mnie",
+    "about": "O mnie",
     "projects": "Projekty",
     "timeline": "Kariera"
   },
@@ -11,7 +11,7 @@
     "heroSubtitle": "Konstruuję kod, buduję doświadczenie.",
     "heroCtaProjects": "Projekty",
     "heroCtaCv": "CV",
-    "aboutTitle": "O Mnie",
+    "aboutTitle": "O mnie",
     "aboutSubtitleStory": "Moja historia",
     "aboutSubtitlePassions": "Poza kodem",
     "aboutP1": "Cześć, jestem Łukasz. Moja przygoda z programowaniem rozpoczęła się wraz ze studiami inżynierskimi na Wydziale Elektrycznym Politechniki Śląskiej. To tam, pisząc pierwsze programy konsolowe w C++, odkryłem pasję do tworzenia. Naturalną ewolucją było przejście na C# i platformę .NET, gdzie rozwijałem umiejętności, budując aplikacje desktopowe w technologiach WinForms i WPF.",
