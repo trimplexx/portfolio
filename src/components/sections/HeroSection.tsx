@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { IconGitHub } from "@/components/icons/IconGitHub";
 import { IconLinkedIn } from "@/components/icons/IconLinkedIn";
 import { motion } from "framer-motion";
+import { Mail, Phone, FileText } from "lucide-react";
 
 export const HeroSection = () => {
   const t = useTranslations("HomePage");
@@ -22,13 +23,6 @@ export const HeroSection = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
-  const scrollToProjects = () => {
-    const projectsSection = document.getElementById("projects");
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <motion.section
       id="hero"
@@ -45,38 +39,48 @@ export const HeroSection = () => {
       </motion.h1>
       <motion.p
         variants={itemVariants}
-        className="mb-8 text-lg text-muted-foreground md:text-xl"
+        className="mb-10 text-lg text-muted-foreground md:text-xl"
       >
         {t("heroSubtitle")}
       </motion.p>
 
       <motion.div
         variants={itemVariants}
-        className="flex flex-col items-center gap-6 sm:flex-row"
+        className="flex flex-col items-center justify-center gap-y-4 gap-x-8 sm:flex-row sm:flex-wrap"
       >
-        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-muted-foreground">
-          <button
-            onClick={scrollToProjects}
-            className="font-medium transition-colors hover:text-primary"
-          >
-            {t("heroCtaProjects")}
-          </button>
-          <a
-            href="/CV - Łukasz Krawczyk.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium transition-colors hover:text-primary"
-          >
-            {t("heroCtaCv")}
-          </a>
-        </div>
+        <a
+          href={`mailto:${t("email")}`}
+          className="flex items-center gap-2 font-medium text-muted-foreground transition-colors hover:text-primary"
+        >
+          <Mail className="h-5 w-5" />
+          <span>{t("email")}</span>
+        </a>
 
-        <div className="hidden h-6 w-px bg-border sm:block" />
+        <a
+          href={`tel:${t("phone").replace(/\s/g, "")}`}
+          className="flex items-center gap-2 font-medium text-muted-foreground transition-colors hover:text-primary"
+        >
+          <Phone className="h-5 w-5" />
+          <span>{t("phone")}</span>
+        </a>
 
-        <div className="flex items-center space-x-6">
-          <IconGitHub className="text-muted-foreground transition-colors hover:text-primary" />
-          <IconLinkedIn className="text-muted-foreground transition-colors hover:text-primary" />
-        </div>
+        <a
+          href="/CV - Łukasz Krawczyk.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 font-medium text-muted-foreground transition-colors hover:text-primary"
+        >
+          <FileText className="h-5 w-5" />
+          <span>{t("heroCtaCv")}</span>
+        </a>
+      </motion.div>
+
+      <motion.div
+        variants={itemVariants}
+        className="mt-8 flex items-center space-x-6"
+      >
+        <IconGitHub className="text-muted-foreground transition-colors hover:text-primary" />
+        <IconLinkedIn className="text-muted-foreground transition-colors hover:text-primary" />
       </motion.div>
     </motion.section>
   );

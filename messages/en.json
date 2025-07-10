@@ -11,6 +11,8 @@
     "heroSubtitle": "Constructing code, building experience.",
     "heroCtaProjects": "Projects",
     "heroCtaCv": "CV",
+    "email": "Ikrawczyk2001@gmail.com",
+    "phone": "734 410 872",
     "aboutTitle": "About Me",
     "aboutSubtitleStory": "My Story",
     "aboutSubtitlePassions": "Beyond the Code",
@@ -24,7 +26,9 @@
     "cookinupDescription": "A web application inspired by the TV show 'Come Dine with Me', allowing users to create lobbies, invite friends, plan culinary meetings, and rate each other's dishes."
   },
   "Footer": {
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "email": "Ikrawczyk2001@gmail.com",
+    "phone": "734 410 872"
   },
   "Timeline": {
     "locale": "en-US",

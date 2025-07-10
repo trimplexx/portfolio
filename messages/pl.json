@@ -11,6 +11,8 @@
     "heroSubtitle": "Konstruuję kod, buduję doświadczenie.",
     "heroCtaProjects": "Projekty",
     "heroCtaCv": "CV",
+    "email": "Ikrawczyk2001@gmail.com",
+    "phone": "734 410 872",
     "aboutTitle": "O mnie",
     "aboutSubtitleStory": "Moja historia",
     "aboutSubtitlePassions": "Poza kodem",
@@ -24,7 +26,9 @@
     "cookinupDescription": "Aplikacja webowa inspirowana programem 'Ugotowani', pozwalająca na tworzenie lobby, zapraszanie znajomych, planowanie spotkań kulinarnych i wzajemne ocenianie potraw."
   },
   "Footer": {
-    "rights": "Wszelkie prawa zastrzeżone."
+    "rights": "Wszelkie prawa zastrzeżone.",
+    "email": "Ikrawczyk2001@gmail.com",
+    "phone": "734 410 872"
   },
   "Timeline": {
     "locale": "pl-PL",
