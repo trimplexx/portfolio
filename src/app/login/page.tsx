@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
@@ -11,6 +12,7 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
+  const router = useRouter();
   const callbackUrl = searchParams.get("callbackUrl") || "/admin/projekty";
 
   const handleSubmit = async (e: FormEvent) => {
@@ -19,21 +21,19 @@ export default function LoginPage() {
     setError(null);
 
     try {
-      const res = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+      const res = await signIn("credentials", {
+        redirect: false,
+        password,
+        callbackUrl,
       });
 
-      const data = await res.json();
-
-      if (data.success) {
-        window.location.href = callbackUrl;
-      } else {
-        setError(data.message || "Logowanie nie powiodło się.");
+      if (res?.error) {
+        setError("Nieprawidłowe hasło.");
+      } else if (res?.url) {
+        router.push(res.url);
       }
     } catch {
-      setError("Wystąpił błąd podczas łączenia z serwerem.");
+      setError("Wystąpił błąd podczas logowania.");
     } finally {
       setIsLoading(false);
     }

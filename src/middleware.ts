@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
+import { getToken } from "next-auth/jwt";
 import { routing } from "./i18/routing";
 
 const intlMiddleware = createIntlMiddleware({
@@ -13,38 +14,37 @@ const adminPaths = [
   "/admin",
   "/admin/projects",
   "/admin/projects/add",
-  "/admin/projects/:id",
+  /^\/admin\/projects\/[^/]+$/,
+  /^\/admin\/projekty\/[^/]+$/,
   "/admin/projekty",
   "/admin/projekty/dodawanie",
-  "/admin/projekty/:id",
 ];
 
 export async function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+  const { pathname, origin } = request.nextUrl;
 
   if (
     pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
+    pathname.startsWith("/api/auth") ||
     pathname.includes(".")
   ) {
     return NextResponse.next();
   }
 
-  const isAdminPath = adminPaths.some(
-    (path) => pathname.startsWith(path) || pathname.startsWith(`/pl${path}`)
+  const isAdminPath = adminPaths.some((p) =>
+    typeof p === "string" ? pathname.startsWith(p) : p.test(pathname)
   );
 
   if (isAdminPath) {
-    const authCookie = request.cookies.get("admin-auth");
-    const isAuthenticated = authCookie?.value === "authenticated";
+    const token = await getToken({
+      req: request,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
 
-    if (!isAuthenticated) {
-      if (pathname !== "/login") {
-        const url = new URL("/login", request.url);
-        url.searchParams.set("callbackUrl", pathname);
-        return NextResponse.redirect(url);
-      }
-      return NextResponse.next();
+    if (!token) {
+      const loginUrl = new URL("/login", origin);
+      loginUrl.searchParams.set("callbackUrl", pathname);
+      return NextResponse.redirect(loginUrl);
     }
 
     if (pathname.startsWith("/pl/admin")) {

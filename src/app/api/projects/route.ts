@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { deleteBlob } from "@/lib/azure-storage";
+import { getServerSession } from "next-auth/next";
 
 export async function GET() {
   try {
@@ -39,6 +40,11 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  const session = await getServerSession();
+  if (!session) {
+    return NextResponse.json({ message: "Brak autoryzacji" }, { status: 401 });
+  }
+
   try {
     const body = await request.json();
     const {
@@ -110,6 +116,11 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: NextRequest) {
+  const session = await getServerSession();
+  if (!session) {
+    return NextResponse.json({ message: "Brak autoryzacji" }, { status: 401 });
+  }
+
   try {
     const url = new URL(request.url);
     const id = url.searchParams.get("id");

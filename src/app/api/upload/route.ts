@@ -1,8 +1,14 @@
 import { NextResponse } from "next/server";
 import { BlobServiceClient } from "@azure/storage-blob";
 import { v4 as uuidv4 } from "uuid";
+import { getServerSession } from "next-auth/next";
 
 export async function POST(request: Request) {
+  const session = await getServerSession();
+  if (!session) {
+    return NextResponse.json({ message: "Brak autoryzacji" }, { status: 401 });
+  }
+
   const formData = await request.formData();
   const file = formData.get("file") as File | null;
 

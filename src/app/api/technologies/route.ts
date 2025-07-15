@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { getServerSession } from "next-auth/next";
 
 export async function GET() {
   try {
@@ -19,6 +20,11 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  const session = await getServerSession();
+  if (!session) {
+    return NextResponse.json({ message: "Brak autoryzacji" }, { status: 401 });
+  }
+
   try {
     const body = await request.json();
     const { names } = body;
